@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - Smart Bank</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 25px 0;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .form-box {
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        max-width: 450px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-box h2 {
+        margin-bottom: 25px;
+        color: #2980b9;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .form-group input:focus {
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(41,128,185,0.5);
+    }
+
+    .btn {
+        background-color: #2980b9;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn:hover {
+        background-color: #1f6391;
+    }
+
+    .form-footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .form-footer a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .form-footer a:hover {
+        text-decoration: underline;
+    }
+
+    footer {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>🏦 Smart Bank - Admin Login</header>
+
+<section class="container">
+    <div class="form-box">
+        <h2>Admin Login</h2>
+        <form action="/admin/adminlogin" method="post" th:object="${admin}">
+            <div class="form-group">
+                <label for="adminUsername">Admin Email</label>
+                <input type="text" id="adminUsername" name="adminEmail" placeholder="Enter your AdminEmail" required>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="form-footer">
+                Don’t have an account? <a href="/admin/adminregistrationpage">Register here</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer>
+    © 2025 Smart Bank | Admin Login | Designed by Vikram Goud
+</footer>
+
+</body>
+</html>

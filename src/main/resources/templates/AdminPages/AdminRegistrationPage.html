@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Registration - Smart Bank</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .form-box {
+        width: 100%;
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        max-width: 450px;
+        text-align: center;
+    }
+
+    .form-box h2 {
+        margin-bottom: 25px;
+        color: #2980b9;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .form-group input:focus {
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(41,128,185,0.5);
+    }
+
+    .btn {
+        background-color: #2980b9;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .btn:hover {
+        background-color: #1f6391;
+    }
+
+    .form-footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .form-footer a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .form-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+<header>🏦 Smart Bank - Admin Registration</header>
+
+<section class="container">
+    <div class="form-box">
+        <h2>Admin Registration</h2>
+        <form action="/admin/adminregistration" method="post" th:object="${admin}">
+            <div class="form-group">
+                <label for="adminName">Full Name</label>
+                <input type="text" id="adminName" name="adminName" placeholder="Enter your full name" required>
+                <span th:text="${allFielderrors!=null?allFielderrors['adminName']:' '}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="adminEmail">Email</label>
+                <input type="email" id="adminEmail" name="adminEmail" placeholder="Enter your email" required>
+                <span th:text="${allFielderrors!=null?allFielderrors['adminEmail']:' '}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="adminMobileNumber">Mobile Number</label>
+                <input type="text" id="adminMobileNumber" name="adminMobileNumber" placeholder="Enter your mobile number" required>
+                <span th:text="${allFielderrors!=null?allFielderrors['adminMobileNumber']:' '}"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter password" required>
+                <span th:text="${allFielderrors!=null?allFielderrors['adminPassowrd']:' '}"></span>
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+
+            <div class="form-footer">
+                Already have an account? <a href="/admin/adminloginpage">Login here</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

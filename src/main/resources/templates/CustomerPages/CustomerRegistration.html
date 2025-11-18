@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Registration</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    .form_container {
+        width: 100vw;
+        height: 95vh;
+        background-color: #fff;
+        width: 450px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        padding: 30px 40px;
+        overflow: scroll;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2980b9;
+        margin-bottom: 25px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #2980b9;
+        outline: none;
+        box-shadow: 0 0 5px #2980b9;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .gender {
+        display: flex;
+        gap: 20px;
+    }
+
+    .gender label {
+        font-weight: normal;
+    }
+
+    input[type="file"] {
+        border: none;
+    }
+
+    button {
+        background-color: #2980b9;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #1f6391;
+    }
+
+    .note {
+        text-align: center;
+        font-size: 13px;
+        color: gray;
+        margin-top: 10px;
+    }
+    
+    .signin_link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .signin_link a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .signin_link a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<div class="form_container">
+    <h2>Customer Registration</h2>
+    <form action="/customer/customerregistration" method="post" enctype="multipart/form-data">
+
+        <label for="customerName">Full Name:</label>
+        <input type="text" id="customerName" name="customerName" placeholder="Enter full name" required>
+
+        <label for="customerEmail">Email:</label>
+        <input type="email" id="customerEmail" name="customerEmail" placeholder="Enter email" required>
+
+        <label for="customerMobileNumber">Mobile Number:</label>
+        <input type="number" id="customerMobileNumber" name="customerMobileNumber" placeholder="Enter mobile number" required>
+
+        <label>Gender:</label>
+        <div class="gender">
+            <label><input type="radio" name="customerGender" value="Male" required> Male</label>
+            <label><input type="radio" name="customerGender" value="Female"> Female</label>
+            <label><input type="radio" name="customerGender" value="Other"> Other</label>
+        </div>
+
+        <label>Account Type:</label>
+        <div class="gender">
+            <label><input type="radio" name="customerAccountType" value="Saving" required> Saving Account</label>
+            <label><input type="radio" name="customerAccountType" value="Current"> Current Account</label>
+        </div>
+
+        <label for="customerAddress">Address:</label>
+        <textarea id="customerAddress" name="customerAddress" rows="3" placeholder="Enter address" required></textarea>
+
+        <label for="customerAadharNumber">Aadhar Number:</label>
+        <input type="number" id="customerAadharNumber" name="customerAadharNumber" placeholder="Enter Aadhar number" required>
+
+        <label for="customerAmount">Initial Amount:</label>
+        <input type="number" id="customerAmount" name="customerAmount" placeholder="Enter deposit amount" required>
+
+        <label for="customerPassword">Password:</label>
+        <input type="password" id="customerPassword" name="customerPassword" placeholder="Enter password" required>
+
+        <button type="submit">Register Customer</button>
+        
+        <div class="signin_link">
+        	Don You have an account? <a href="/customer/customerloginpage">Customer Login here</a>
+        </div>
+            
+        <p class="note">By clicking Register, you agree to our terms and conditions.</p>
+    </form>
+</div>
+
+</body>
+</html>

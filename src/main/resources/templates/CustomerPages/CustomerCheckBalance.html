@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Balance - Smart Bank</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 25px 0;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+        background-color: #1f6391;
+        display: flex;
+        justify-content: center;
+        padding: 12px 0;
+        flex-wrap: wrap;
+    }
+
+    nav form {
+        margin: 5px 10px;
+    }
+
+    nav input[type="submit"] {
+        background-color: transparent;
+        border: 2px solid transparent;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 8px 15px;
+        border-radius: 8px;
+    }
+
+    nav input[type="submit"]:hover {
+        background-color: #2980b9;
+        border-color: white;
+    }
+
+    .container {
+        width: 420px;
+        margin: 5px auto;
+        background: white;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #1f4e79;
+    }
+
+    label {
+        font-weight: 600;
+        color: #333;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #bbb;
+        font-size: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #2980b9;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #1f4e79;
+    }
+
+    footer {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+        margin-top: auto;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    #available_balance{
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+        padding:1vw;
+        margin:0.5vw;
+        border-radius:1vw;
+        background:#2980b9;
+        color:white;
+    }
+    
+     #customer_name_heading {
+        font-size: 28px;
+        color: #1f6391;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        padding:3vw 0vw 0vw 0vw;
+    }
+</style>
+
+</head>
+<body>
+
+<header>🏦 Smart Bank - Check Balance</header>
+
+<nav>
+	 <form action="/customer/customerlogin">
+        <input type="hidden" name="customerName" th:value="${customerDetails.getCustomerName}">
+        <input type="hidden" name="customerEmail" th:value="${customerDetails.getCustomerEmail}">
+        <input type="hidden" name="customerMobileNumber" th:value="${customerDetails.getCustomerMobileNumber}">
+        <input type="hidden" name="customerGender" th:value="${customerDetails.getCustomerGender}">
+        <input type="hidden" name="customerAddress" th:value="${customerDetails.getCustomerAddress}">
+        <input type="hidden" name="customerAadharNumber" th:value="${customerDetails.getCustomerAadharNumber}">
+        <input type="hidden" name="customerAccountNumber" th:value="${customerDetails.getCustomerAccountNumber}">
+        <input type="hidden" name="customerAccountType" th:value="${customerDetails.getCustomerAccountType}">
+        <input type="hidden" name="customerAmount" th:value="${customerDetails.getCustomerAmount}">
+        <input type="hidden" name="customerPassword" th:value="${customerDetails.getCustomerPassword}">
+        <input type="hidden" name="customerStatus" th:value="${customerDetails.getCustomerStatus}">
+      	<input type="submit" value="Home">
+	 </form>
+	 <form action="/customer/customerdepositpage">
+        <input type="hidden" name="customerName" th:value="${customerDetails.getCustomerName}">
+        <input type="hidden" name="customerEmail" th:value="${customerDetails.getCustomerEmail}">
+        <input type="hidden" name="customerMobileNumber" th:value="${customerDetails.getCustomerMobileNumber}">
+        <input type="hidden" name="customerGender" th:value="${customerDetails.getCustomerGender}">
+        <input type="hidden" name="customerAddress" th:value="${customerDetails.getCustomerAddress}">
+        <input type="hidden" name="customerAadharNumber" th:value="${customerDetails.getCustomerAadharNumber}">
+        <input type="hidden" name="customerAccountNumber" th:value="${customerDetails.getCustomerAccountNumber}">
+        <input type="hidden" name="customerAccountType" th:value="${customerDetails.getCustomerAccountType}">
+        <input type="hidden" name="customerAmount" th:value="${customerDetails.getCustomerAmount}">
+        <input type="hidden" name="customerPassword" th:value="${customerDetails.getCustomerPassword}">
+        <input type="hidden" name="customerStatus" th:value="${customerDetails.getCustomerStatus}">
+      	<input type="submit" value="Deposit">
+	 </form>
+	 <form action="/customer/customerwithdrawpage">
+        <input type="hidden" name="customerName" th:value="${customerDetails.getCustomerName}">
+        <input type="hidden" name="customerEmail" th:value="${customerDetails.getCustomerEmail}">
+        <input type="hidden" name="customerMobileNumber" th:value="${customerDetails.getCustomerMobileNumber}">
+        <input type="hidden" name="customerGender" th:value="${customerDetails.getCustomerGender}">
+        <input type="hidden" name="customerAddress" th:value="${customerDetails.getCustomerAddress}">
+        <input type="hidden" name="customerAadharNumber" th:value="${customerDetails.getCustomerAadharNumber}">
+        <input type="hidden" name="customerAccountNumber" th:value="${customerDetails.getCustomerAccountNumber}">
+        <input type="hidden" name="customerAccountType" th:value="${customerDetails.getCustomerAccountType}">
+        <input type="hidden" name="customerAmount" th:value="${customerDetails.getCustomerAmount}">
+        <input type="hidden" name="customerPassword" th:value="${customerDetails.getCustomerPassword}">
+        <input type="hidden" name="customerStatus" th:value="${customerDetails.getCustomerStatus}">
+      	<input type="submit" value="Withdraw">
+	 </form>
+	 <form action="/customer/customercheckbalancepage">
+        <input type="hidden" name="customerName" th:value="${customerDetails.getCustomerName}">
+        <input type="hidden" name="customerEmail" th:value="${customerDetails.getCustomerEmail}">
+        <input type="hidden" name="customerMobileNumber" th:value="${customerDetails.getCustomerMobileNumber}">
+        <input type="hidden" name="customerGender" th:value="${customerDetails.getCustomerGender}">
+        <input type="hidden" name="customerAddress" th:value="${customerDetails.getCustomerAddress}">
+        <input type="hidden" name="customerAadharNumber" th:value="${customerDetails.getCustomerAadharNumber}">
+        <input type="hidden" name="customerAccountNumber" th:value="${customerDetails.getCustomerAccountNumber}">
+        <input type="hidden" name="customerAccountType" th:value="${customerDetails.getCustomerAccountType}">
+        <input type="hidden" name="customerAmount" th:value="${customerDetails.getCustomerAmount}">
+        <input type="hidden" name="customerPassword" th:value="${customerDetails.getCustomerPassword}">
+        <input type="hidden" name="customerStatus" th:value="${customerDetails.getCustomerStatus}">
+      	<input type="submit" value="Check Balance">
+	 </form>
+</nav>
+
+    <h1 th:text="${customerDetails.getCustomerName().toUpperCase()}" id="customer_name_heading"></h1>
+
+<section class="container">
+    <h2>Check Balance</h2>
+
+    <form action="/customer/customercheckbalance" method="post">
+        <label for="customerAccountNumber">Enter Account Number</label>
+        <input type="number" id="customerAccountNumber" name="accountNumber" placeholder="Enter account number" required>
+        
+        <input type="hidden" name="customerName" th:value="${customerDetails.getCustomerName}">
+        <input type="hidden" name="customerEmail" th:value="${customerDetails.getCustomerEmail}">
+        <input type="hidden" name="customerMobileNumber" th:value="${customerDetails.getCustomerMobileNumber}">
+        <input type="hidden" name="customerGender" th:value="${customerDetails.getCustomerGender}">
+        <input type="hidden" name="customerAddress" th:value="${customerDetails.getCustomerAddress}">
+        <input type="hidden" name="customerAadharNumber" th:value="${customerDetails.getCustomerAadharNumber}">
+        <input type="hidden" name="customerAccountNumber" th:value="${customerDetails.getCustomerAccountNumber}">
+        <input type="hidden" name="customerAmount" th:value="${customerDetails.getCustomerAmount}">
+        <input type="hidden" name="customerAccountType" th:value="${customerDetails.getCustomerAccountType}">
+        <input type="hidden" name="customerPassword" th:value="${customerDetails.getCustomerPassword}">
+        <input type="hidden" name="customerStatus" th:value="${customerDetails.getCustomerStatus}">
+		
+		
+        <input type="submit" class="btn" value="Check Balance">
+        <span th:if="${checkBalanceStatus}" th:text="${checkBalanceStatus?.toUpperCase()}" id="available_balance"></span>
+    </form>
+</section>
+
+<footer>
+    © 2025 Smart Bank | Designed by Vikram Goud
+</footer>
+
+</body>
+</html>

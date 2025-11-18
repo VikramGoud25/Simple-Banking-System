@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer Login</title>
+<style>
+    /* Reset default browser styles */
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        background-color: white;
+        padding: 40px 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        width: 350px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 25px;
+        color: #2980b9;
+        font-size: 24px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #2980b9;
+        outline: none;
+        box-shadow: 0 0 5px #2980b9;
+    }
+
+    button {
+        width: 100%;
+        background-color: #2980b9;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #1f6391;
+    }
+
+    .signup-link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .signup-link a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Customer Login</h2>
+        <form action="/customer/customerlogin" method="post">
+            <div class="input-group">
+                <label for="username">Customer Email</label>
+                <input type="text" id="username" name="customerEmail" placeholder="Enter Customer Entity" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="customerPassword" placeholder="Enter Customer Password" required>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="signup-link">
+                Don’t have an account? <a href="/customer/customerregistrationpage">Register here</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

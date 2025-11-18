@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Transactions - Smart Bank</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    header {
+        width: 100vw;
+        height: 15%;
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 25px 0;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    nav {
+        width: 100vw;
+        height: 10vh;
+        background-color: #1f6391;
+        display: flex;
+        justify-content: center;
+        padding: 12px 0;
+        flex-wrap: wrap;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    nav a, nav input[type="submit"] {
+        color: white;
+        text-decoration: none;
+        margin: 0 25px;
+        font-size: 16px;
+        font-weight: bold;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+
+    nav a:hover, nav input[type="submit"]:hover {
+        background-color: white;
+        color: #1f6391;
+    }
+
+    .container {
+        width: 100vw;
+        flex: 1;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+        color: #2980b9;
+        margin-bottom: 25px;
+        font-size: 30px;
+        text-align: center;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Search Bar */
+    input[type="text"] {
+        width: 280px;
+        padding: 10px 14px;
+        margin: 0vw 0vw 1vw 0vw;
+        border-radius: 8px;
+        border: 1px solid #2980b9;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        
+    }
+
+    input[type="text"]:focus {
+        border-color: #1f6391;
+        box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+    }
+
+    input[type="submit"] {
+        padding: 10px 18px;
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+        
+    }
+
+    input[type="submit"]:hover {
+        background-color: #1f6391;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 90%;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 14px;
+        border-bottom: 1px solid #ddd;
+        font-size: 15px;
+    }
+
+    th {
+        background-color: #2980b9;
+        color: white;
+        font-size: 16px;
+    }
+
+    tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #555;
+        font-size: 18px;
+        padding: 30px;
+    }
+
+    footer {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        table {
+            width: 100%;
+            font-size: 13px;
+        }
+
+        nav {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav a, nav input[type="submit"] {
+            margin: 8px 0;
+        }
+
+        form[action=""] {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        form[action=""] input[type="text"] {
+            width: 90%;
+        }
+    }
+    input[type="text"] {
+    width: 280px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #2980b9;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #1f6391;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+}
+</style>
+</head>
+
+<body>
+
+<header>🏦 Smart Bank - View Transactions</header>
+
+<nav>
+    <form action="/admin/adminhomepage" method="get">
+        <input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Home">
+    </form>
+    <form action="/admin/adminviewallcustomerpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="View Customers">
+    </form>
+    <form action="/admin/addcustomerpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Add Customer">
+    </form>
+    <form action="/admin/viewtransactionpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="View Customer Transactions">
+    </form>
+    <form action="/admin/adminloginpage" method="post">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Logout">
+    </form>
+</nav>
+
+<section class="container">
+    <h2>Veiw Customer Transactions</h2>
+
+    <form action="/admin/viewtransaction">
+        <input type="text" name="customerName" placeholder="Enter Your Customer Name ">
+        <input type="text" name="accountNumber" placeholder="Enter Customer Account Number ">
+        <input type="submit" value="Serach">
+    </form>
+
+    <!-- Transactions Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Account Number</th>
+                <th>Customer Name</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Example Data -->
+            <tr th:if="${customerStatement}" th:each="statement:${customerStatement}">
+                <td th:text="${statement.getCustomerStatementId}"></td>
+                <td th:text="${statement.getCustomerStatementAccountNumber}"></td>
+                <td th:text="${statement.getCustomerStatementName}"></td>
+                <td th:text="${statement.getCustomerStatementType}"></td>
+                <td th:text="${statement.getCustomerTotalAmount}"></td>
+                <td th:text="${statement.getCustomerStatementDate}"></td>
+                <td th:text="${statement.getCustomerStatementStaus}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+
+<footer>
+    © 2025 Smart Bank | Admin Panel | Designed by Vikram Goud
+</footer>
+
+</body>
+</html>

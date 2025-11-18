@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View All Customers - Smart Bank</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 25px 0;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+     nav {
+        background-color: #1f6391;
+        display: flex;
+        justify-content: center;
+        padding: 12px 0;
+        flex-wrap: wrap;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    nav a, nav input[type="submit"] {
+        color: white;
+        text-decoration: none;
+        margin: 0 25px;
+        font-size: 16px;
+        font-weight: 600;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 8px 16px;
+        border-radius: 8px;
+    }
+
+    nav a:hover, nav input[type="submit"]:hover {
+        background-color: white;
+        color: #1f6391;
+    }
+
+    section {
+        flex: 1;
+        padding: 30px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #2980b9;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 95%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        font-size: 15px;
+    }
+
+    th {
+        background-color: #2980b9;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        background-color: #2980b9;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: 600;
+    }
+
+    .btn:hover {
+        background-color: #1f6391;
+    }
+
+    footer {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>🏦 Smart Bank - View All Customers</header>
+
+<nav>
+    <form action="/admin/adminhomepage" method="get">
+        <input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Home">
+    </form>
+    <form action="/admin/adminviewallcustomerpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="View Customers">
+    </form>
+    <form action="/admin/addcustomerpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Add Customer">
+    </form>
+    <form action="/admin/viewtransactionpage" method="get">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="View Customer Transactions">
+    </form>
+    <form action="/admin/adminloginpage" method="post">
+    	<input type="hidden" name="adminName" th:value="${adminDetails.getAdminName()}">
+        <input type="hidden" name="adminEmail" th:value="${adminDetails.getAdminEmail()}">
+        <input type="hidden" name="adminMobileNumber" th:value="${adminDetails.getAdminMobileNumber()}">
+        <input type="hidden" name="adminPassword" th:value="${adminDetails.getAdminPassword()}">
+        <input type="submit" value="Logout">
+    </form>
+</nav>
+
+<section>
+    <h1 th:text="${adminDetails.getAdminName().toUpperCase}"></h1>
+    <h1>All Customer Accounts (Pending / Active)</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Account Number</th>
+                <th>Status</th>
+                <th>Balance</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic rows (Thymeleaf) -->
+            <tr th:each="customerDetail : ${customerDetails}">
+                <td th:text="${customerDetail.getCustomerId()}"></td>
+                <td th:text="${customerDetail.getCustomerName()}"></td>
+                <td th:text="${customerDetail.getCustomerEmail()}"></td>
+                <td th:text="${customerDetail.getCustomerMobileNumber()}"></td>
+                <td th:text="${customerDetail.getCustomerAccountNumber()}"></td>
+                <td th:text="${customerDetail.getCustomerStatus()}"></td>
+                <td th:text="'₹' + ${customerDetail.getCustomerAmount()}"></td>
+                <td>
+                    <form action="/admin/approveCustomer" method="post" style="display:inline;">
+                        <input type="hidden" name="customerId">
+                        <button class="btn" type="submit">Approve</button>
+                    </form>
+                    <form action="/admin/rejectCustomer" method="post" style="display:inline;">
+                        <input type="hidden" name="customerId">
+                        <button class="btn" type="submit">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<footer>
+    © 2025 Smart Bank | Admin Panel | Designed by Vikram Goud
+</footer>
+
+</body>
+</html>
